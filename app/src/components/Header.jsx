@@ -1,3 +1,3 @@
 export const Header = () => {
-  return <h1>NC Market Place</h1>;
+  return <h1>Nayem-NC-Games</h1>;
 };

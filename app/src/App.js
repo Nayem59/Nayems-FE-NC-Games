@@ -1,12 +1,15 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header.jsx";
+import { Login } from "./components/Login.jsx";
+import { Reviews } from "./components/Reviews.jsx";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/reviews" element={<Reviews />} />
         {/* prep for routes down the line */}
         {/* <Route path="/reviews/:review_id" element={<SingleReview />} /> */}
