@@ -11,7 +11,6 @@ function App() {
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
-  console.log(reviews);
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,7 +19,7 @@ function App() {
       setTotalCount(data.total_count);
       setIsLoading(false);
     });
-  }, [page]);
+  }, [page, reviews.length]);
 
   return (
     <div className="App">

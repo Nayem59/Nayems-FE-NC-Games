@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 export const ReviewsContainer = ({
   reviews,
@@ -8,8 +7,6 @@ export const ReviewsContainer = ({
   setPage,
   page,
 }) => {
-  const [nextPage, setNextPage] = useState();
-
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
@@ -33,7 +30,7 @@ export const ReviewsContainer = ({
       <div>
         {reviews.map((review) => {
           return (
-            <Link to={`/reviews/${review.review_id}`} key={review.review_id}>
+            <Link to={`/reviews/${review.review_id}`} key={review.review_id} >
               <div className="review-card">
                 <p>owner: {review.owner}</p>
                 <p>title: {review.title}</p>
@@ -59,9 +56,13 @@ export const ReviewsContainer = ({
             prev
           </button>
         )}
-        <button type="button" onClick={handleNext}>
-          next
-        </button>
+        {!reviews.length ? (
+          <></>
+        ) : (
+          <button type="button" onClick={handleNext}>
+            next
+          </button>
+        )}
       </div>
     </div>
   );
