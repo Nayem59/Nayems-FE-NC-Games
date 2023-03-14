@@ -4,7 +4,6 @@ import { getComments } from "../api/api";
 export const Comments = ({ review, review_id }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(comments);
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,7 +23,7 @@ export const Comments = ({ review, review_id }) => {
       <ul>
         {comments.map((comment) => {
           return (
-            <li>
+            <li key={comment.comment_id}>
               <p>Author: {comment.author}</p>
               <p>{comment.body}</p>
               <p>Comment made on: {comment.created_at}</p>
