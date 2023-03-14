@@ -44,11 +44,8 @@ export const Reviews = () => {
         <div>
           {reviews.map((review) => {
             return (
-              <div className="review-card">
-                <Link
-                  to={`/reviews/${review.review_id}`}
-                  key={review.review_id}
-                >
+              <div className="review-card" key={review.review_id}>
+                <Link to={`/reviews/${review.review_id}`}>
                   <p>owner: {review.owner}</p>
                   <p>title: {review.title}</p>
                   <p>category: {review.category}</p>
