@@ -13,3 +13,15 @@ export const getReviews = (page) => {
       return data;
     });
 };
+
+export const getReview = (id) => {
+  return beNcGamesApi.get(`/reviews/${id}`).then(({ data }) => {
+    return data.review;
+  });
+};
+
+export const getComments = (id) => {
+  return beNcGamesApi.get(`/reviews/${id}/comments`).then(({ data }) => {
+    return data.comments;
+  });
+};
