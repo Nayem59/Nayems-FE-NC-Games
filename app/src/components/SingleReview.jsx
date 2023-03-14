@@ -42,9 +42,9 @@ export const SingleReview = () => {
           <h3>Votes: {review.votes}</h3>
           <button>Vote</button>
         </div>
-        <button onClick={handleBack}>back</button>
       </div>
       <Comments review={review} review_id={review_id} />
+      <button onClick={handleBack}>back</button>
     </div>
   );
 };
