@@ -38,14 +38,14 @@ export const Reviews = () => {
       <Link to="/categories">
         <button>Categories</button>
       </Link>
-      <div id="revies-container">
+      <div id="all-reviews-container">
         <h2>Here are all the {totalCount} Reviews:</h2>
         <button>sort</button>
         <div>
           {reviews.map((review) => {
             return (
-              <Link to={`/reviews/${review.review_id}`} key={review.review_id}>
-                <div className="review-card">
+              <div className="review-card" key={review.review_id}>
+                <Link to={`/reviews/${review.review_id}`}>
                   <p>owner: {review.owner}</p>
                   <p>title: {review.title}</p>
                   <p>category: {review.category}</p>
@@ -53,12 +53,12 @@ export const Reviews = () => {
                   <p>designer: {review.designer}</p>
                   <p>comment count: {review.comment_count}</p>
                   <img
-                    id="img-reviews"
+                    className="img-reviews"
                     src={review.review_img_url}
                     alt={review.title}
                   />
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
         </div>
