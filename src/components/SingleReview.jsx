@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { getReview } from "../api/api";
-// import { Comments } from "./Comments.jsx";
+import { Comments } from "./Comments.jsx";
 
 export const SingleReview = () => {
   const navigate = useNavigate();
@@ -42,9 +42,9 @@ export const SingleReview = () => {
           <h3>Votes: {review.votes}</h3>
           <button>Vote</button>
         </div>
-        <button onClick={handleBack}>back</button>
       </div>
-      {/* <Comments review={review} review_id={review_id} /> */}
+      <Comments review={review} review_id={review_id} />
+      <button onClick={handleBack}>back</button>
     </div>
   );
 };
