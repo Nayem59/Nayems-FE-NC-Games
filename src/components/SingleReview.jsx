@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { getReview } from "../api/api";
 import { Comments } from "./Comments.jsx";
+import {NewComment} from "./NewComment.jsx"
 
 export const SingleReview = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ export const SingleReview = () => {
         </div>
       </div>
       <Comments review={review} review_id={review_id} />
+      <NewComment />
       <button onClick={handleBack}>back</button>
     </div>
   );
