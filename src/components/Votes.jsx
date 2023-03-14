@@ -12,7 +12,7 @@ export const Votes = ({ votes, setVotes, review_id }) => {
       inc_votes: 1,
     }).catch(() => {
       setVotes((currVotes) => currVotes - 1);
-      setErr("ups we got some connection issues, sorry...");
+      setErr("oops we got some connection issues, sorry...");
     });
   };
 
@@ -24,7 +24,7 @@ export const Votes = ({ votes, setVotes, review_id }) => {
       inc_votes: -1,
     }).catch(() => {
       setVotes((currVotes) => currVotes + 1);
-      setErr("ups we got some connection issues, sorry...");
+      setErr("oops we got some connection issues, sorry...");
     });
   };
 
