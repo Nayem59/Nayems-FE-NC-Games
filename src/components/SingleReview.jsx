@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { getReview } from "../api/api";
 import { Comments } from "./Comments.jsx";
+import { Votes } from "./Votes.jsx";
 
 export const SingleReview = () => {
   const navigate = useNavigate();
   const { review_id } = useParams();
   const [review, setReview] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [votes, setVotes] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
     getReview(review_id).then((review) => {
       setReview(review);
+      setVotes(review.votes);
       setIsLoading(false);
     });
   }, [review_id]);
@@ -38,10 +41,7 @@ export const SingleReview = () => {
           alt={review.title}
         />
         <p className="review-body">Review: {review.review_body}</p>
-        <div className="votes-container">
-          <h3>Votes: {review.votes}</h3>
-          <button>Vote</button>
-        </div>
+        <Votes votes={votes} setVotes={setVotes} review_id={review_id}/>
       </div>
       <Comments review={review} review_id={review_id} />
       <button onClick={handleBack}>back</button>

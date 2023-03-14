@@ -25,3 +25,9 @@ export const getComments = (id) => {
     return data.comments;
   });
 };
+
+export const patchReview = (id, obj) => {
+  return beNcGamesApi.patch(`/reviews/${id}`, obj).then(({ data }) => {
+    return data.review;
+  });
+};
