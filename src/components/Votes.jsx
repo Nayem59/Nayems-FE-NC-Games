@@ -3,9 +3,11 @@ import { patchReview } from "../api/api";
 
 export const Votes = ({ votes, setVotes, review_id }) => {
   const [err, setErr] = useState(null);
+  const [hasVoted, setHasVoted] = useState(false);
 
   const handleUp = () => {
     setVotes((currVotes) => currVotes + 1);
+    setHasVoted(true);
     setErr(null);
 
     patchReview(review_id, {
@@ -18,6 +20,7 @@ export const Votes = ({ votes, setVotes, review_id }) => {
 
   const handleDown = () => {
     setVotes((currVotes) => currVotes - 1);
+    setHasVoted(false);
     setErr(null);
 
     patchReview(review_id, {
@@ -32,8 +35,12 @@ export const Votes = ({ votes, setVotes, review_id }) => {
     <div className="votes-container">
       <h3>Votes: {votes}</h3>
       {err ? <p>{err}</p> : null}
-      <button onClick={handleUp}>+</button>
-      <button onClick={handleDown}>-</button>
+      <button onClick={handleUp} disabled={hasVoted}>
+        +
+      </button>
+      <button onClick={handleDown} disabled={!hasVoted}>
+        -
+      </button>
     </div>
   );
 };

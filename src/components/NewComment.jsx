@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postComments } from "../api/api";
 
-export const NewComment = ({ author, review_id }) => {
+export const NewComment = ({ author, review_id, setHasCommented }) => {
   const [text, setText] = useState("");
   const [isPending, setIsPending] = useState(false);
 
@@ -15,6 +15,9 @@ export const NewComment = ({ author, review_id }) => {
     postComments(review_id, commentObj).then(() => {
       console.log("posted comment");
       setText("");
+      setHasCommented((currHasCommented) => {
+        return currHasCommented ? false : true;
+      });
       setIsPending(false);
     });
   };

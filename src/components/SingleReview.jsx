@@ -12,6 +12,7 @@ export const SingleReview = ({ author }) => {
   const [review, setReview] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
+  const [hasCommented, setHasCommented] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,8 +46,16 @@ export const SingleReview = ({ author }) => {
         <p className="review-body">Review: {review.review_body}</p>
         <Votes votes={votes} setVotes={setVotes} review_id={review_id} />
       </div>
-      <NewComment author={author} review_id={review_id} />
-      <Comments review={review} review_id={review_id} />
+      <NewComment
+        author={author}
+        review_id={review_id}
+        setHasCommented={setHasCommented}
+      />
+      <Comments
+        review={review}
+        review_id={review_id}
+        hasCommented={hasCommented}
+      />
       <button onClick={handleBack}>back</button>
     </div>
   );

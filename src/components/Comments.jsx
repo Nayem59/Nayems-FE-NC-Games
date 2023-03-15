@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getComments } from "../api/api";
 
-export const Comments = ({ review, review_id }) => {
+export const Comments = ({ review, review_id, hasCommented }) => {
   const [reviewComments, setReviewComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,7 +11,7 @@ export const Comments = ({ review, review_id }) => {
       setReviewComments(comments);
       setIsLoading(false);
     });
-  }, [review_id]);
+  }, [review_id, hasCommented]);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
