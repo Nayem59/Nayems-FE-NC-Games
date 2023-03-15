@@ -44,8 +44,8 @@ export const SingleReview = () => {
         <p className="review-body">Review: {review.review_body}</p>
         <Votes votes={votes} setVotes={setVotes} review_id={review_id} />
       </div>
-      <Comments review={review} review_id={review_id} />
       <NewComment />
+      <Comments review={review} review_id={review_id} />
       <button onClick={handleBack}>back</button>
     </div>
   );

@@ -8,12 +8,12 @@ export const NewComment = () => {
     setText(event.target.value);
   };
 
-  const handleAddBtn = () => {
+  const handlePostBtn = () => {
     setNewComment(text);
     setText("");
   };
 
-  console.log(newComment);
+  console.log("hi");
 
   return (
     <div className="new-comment-container">
@@ -22,13 +22,13 @@ export const NewComment = () => {
         name="comment"
         id="comment"
         cols="30"
-        rows="10"
+        rows="7"
         placeholder="Add a comment..."
         value={text}
         onChange={handleText}
       ></textarea>
-      <button type="button" onClick={handleAddBtn}>
-        Add
+      <button type="button" onClick={handlePostBtn}>
+        Post
       </button>
     </div>
   );
