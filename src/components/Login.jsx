@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const Login = ({author, setAuthor}) => {
+export const Login = ({ author, setAuthor }) => {
   console.log(author);
 
   return (

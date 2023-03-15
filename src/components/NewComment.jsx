@@ -1,19 +1,25 @@
 import { useState } from "react";
+import { postComments } from "../api/api";
 
-export const NewComment = () => {
+export const NewComment = ({ author, review_id }) => {
   const [text, setText] = useState("");
-  const [newComment, setNewComment] = useState("");
+  const [isPending, setIsPending] = useState(false);
 
   const handleText = (event) => {
     setText(event.target.value);
   };
 
   const handlePostBtn = () => {
-    setNewComment(text);
-    setText("");
+    const commentObj = { username: author, body: text };
+    setIsPending(true);
+    postComments(review_id, commentObj).then(() => {
+      console.log("posted comment");
+      setText("");
+      setIsPending(false);
+    });
   };
 
-  console.log("hi");
+  console.log("test");
 
   return (
     <div className="new-comment-container">
@@ -27,9 +33,16 @@ export const NewComment = () => {
         value={text}
         onChange={handleText}
       ></textarea>
-      <button type="button" onClick={handlePostBtn}>
-        Post
-      </button>
+      {!isPending && (
+        <button type="button" onClick={handlePostBtn}>
+          Post
+        </button>
+      )}
+      {isPending && (
+        <button type="button" disabled>
+          Posting...
+        </button>
+      )}
     </div>
   );
 };

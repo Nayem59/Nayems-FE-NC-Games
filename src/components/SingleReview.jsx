@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getReview } from "../api/api";
 import { Comments } from "./Comments.jsx";
 import { NewComment } from "./NewComment.jsx";
 import { Votes } from "./Votes.jsx";
 
-export const SingleReview = () => {
+export const SingleReview = ({ author }) => {
   const navigate = useNavigate();
   const { review_id } = useParams();
   const [review, setReview] = useState({});
@@ -44,7 +45,7 @@ export const SingleReview = () => {
         <p className="review-body">Review: {review.review_body}</p>
         <Votes votes={votes} setVotes={setVotes} review_id={review_id} />
       </div>
-      <NewComment />
+      <NewComment author={author} review_id={review_id} />
       <Comments review={review} review_id={review_id} />
       <button onClick={handleBack}>back</button>
     </div>

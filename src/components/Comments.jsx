@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { getComments } from "../api/api";
 
 export const Comments = ({ review, review_id }) => {
-  const [comments, setComments] = useState([]);
+  const [reviewComments, setReviewComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     getComments(review_id).then((comments) => {
-      setComments(comments);
+      setReviewComments(comments);
       setIsLoading(false);
     });
   }, [review_id]);
@@ -21,7 +21,7 @@ export const Comments = ({ review, review_id }) => {
     <div className="comments-container">
       <h3>{review.comment_count} comments:</h3>
       <ul>
-        {comments.map((comment) => {
+        {reviewComments.map((comment) => {
           return (
             <li key={comment.comment_id}>
               <p>Author: {comment.author}</p>

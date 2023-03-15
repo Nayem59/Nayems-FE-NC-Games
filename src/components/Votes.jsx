@@ -28,8 +28,6 @@ export const Votes = ({ votes, setVotes, review_id }) => {
     });
   };
 
-  console.log(votes);
-
   return (
     <div className="votes-container">
       <h3>Votes: {votes}</h3>
