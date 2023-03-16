@@ -64,3 +64,15 @@ li {
   list-style: none;
   margin: 0 6vw;
 }
+
+.new-comment-container {
+  border: solid black;
+  border-radius: 30px;
+  margin: 10px;
+  box-shadow: 10px 10px 10px;
+}
+
+textarea {
+  width: 80vw;
+  border-radius: 7px;
+}

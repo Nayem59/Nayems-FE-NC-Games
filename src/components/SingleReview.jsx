@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getReview } from "../api/api";
 import { Comments } from "./Comments.jsx";
+import { NewComment } from "./NewComment.jsx";
 import { Votes } from "./Votes.jsx";
 
-export const SingleReview = () => {
+export const SingleReview = ({ author }) => {
   const navigate = useNavigate();
   const { review_id } = useParams();
   const [review, setReview] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
+  const [commentCount, setCommentCount] = useState(0); // <---
+  const [reviewComments, setReviewComments] = useState([]); // <---
+  // const [hasCommented, setHasCommented] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     getReview(review_id).then((review) => {
       setReview(review);
       setVotes(review.votes);
+      setCommentCount(+review.comment_count)
       setIsLoading(false);
     });
-  }, [review_id]);
+  }, [review_id]); // hasCommented
 
   const handleBack = () => {
     navigate(-1);
@@ -41,9 +47,22 @@ export const SingleReview = () => {
           alt={review.title}
         />
         <p className="review-body">Review: {review.review_body}</p>
-        <Votes votes={votes} setVotes={setVotes} review_id={review_id}/>
+        <Votes votes={votes} setVotes={setVotes} review_id={review_id} />
       </div>
-      <Comments review={review} review_id={review_id} />
+      <NewComment
+        author={author}
+        review_id={review_id}
+        setReviewComments={setReviewComments} // <---
+        setCommentCount={setCommentCount} // <---
+        // setHasCommented={setHasCommented}
+      />
+      <Comments
+        review={review}
+        review_id={review_id}
+        commentCount={commentCount} // <---
+        reviewComments={reviewComments} // <---
+        setReviewComments={setReviewComments} // <---
+      />
       <button onClick={handleBack}>back</button>
     </div>
   );

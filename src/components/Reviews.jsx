@@ -6,13 +6,15 @@ export const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
     getReviews(page).then((data) => {
       setReviews(data.reviews);
       setTotalCount(data.total_count);
+      setMaxPage(Math.ceil(data.total_count / 10));
       setIsLoading(false);
     });
   }, [page]);
@@ -35,6 +37,9 @@ export const Reviews = () => {
 
   return (
     <div>
+      <nav>
+        <Link to="/">back to login</Link>
+      </nav>
       <Link to="/categories">
         <button>Categories</button>
       </Link>
@@ -63,14 +68,14 @@ export const Reviews = () => {
           })}
         </div>
         <div className="pagination">
-          {page === 0 ? (
+          {page === 1 ? (
             <></>
           ) : (
             <button type="button" onClick={handlePrev}>
               prev
             </button>
           )}
-          {!reviews.length ? (
+          {page === maxPage ? (
             <></>
           ) : (
             <button type="button" onClick={handleNext}>
