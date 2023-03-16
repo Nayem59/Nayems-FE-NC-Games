@@ -13,9 +13,15 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Login author={author} setAuthor={setAuthor} />} />
+        <Route
+          path="/"
+          element={<Login author={author} setAuthor={setAuthor} />}
+        />
         <Route path="/reviews" element={<Reviews />} />
-        <Route path="/reviews/:review_id" element={<SingleReview author={author}/>} />
+        <Route
+          path="/reviews/:review_id"
+          element={<SingleReview author={author} />}
+        />
         {/* prep for routes down the line */}
         {/* <Route path="/categories" element={<Categories />} /> */}
         {/* <Route path="/categories/:category" element={<SingleCategory />} /> */}
