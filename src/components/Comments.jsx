@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { getComments } from "../api/api";
 
-export const Comments = ({ review, review_id }) => {
-  const [reviewComments, setReviewComments] = useState([]);
+export const Comments = ({
+  review,
+  review_id,
+  commentCount, // <---
+  reviewComments, // <---
+  setReviewComments, // <---
+}) => {
+  // const [reviewComments, setReviewComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -11,7 +17,7 @@ export const Comments = ({ review, review_id }) => {
       setReviewComments(comments);
       setIsLoading(false);
     });
-  }, [review_id]);
+  }, [review_id, setReviewComments]);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -19,7 +25,7 @@ export const Comments = ({ review, review_id }) => {
 
   return (
     <div className="comments-container">
-      <h3>{review.comment_count} comments:</h3>
+      <h3>{commentCount} comments:</h3>
       <ul>
         {reviewComments.map((comment) => {
           return (

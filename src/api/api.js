@@ -34,7 +34,7 @@ export const patchReview = (id, obj) => {
 
 export const postComments = (id, obj) => {
   return beNcGamesApi.post(`/reviews/${id}/comments`, obj).then(({ data }) => {
-    return data.comments;
+    return data.comment;
   });
 };
 
