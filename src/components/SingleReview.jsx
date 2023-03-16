@@ -12,19 +12,18 @@ export const SingleReview = ({ author }) => {
   const [review, setReview] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
-  const [commentCount, setCommentCount] = useState(0); // <---
-  const [reviewComments, setReviewComments] = useState([]); // <---
-  // const [hasCommented, setHasCommented] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
+  const [reviewComments, setReviewComments] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
     getReview(review_id).then((review) => {
       setReview(review);
       setVotes(review.votes);
-      setCommentCount(+review.comment_count)
+      setCommentCount(+review.comment_count);
       setIsLoading(false);
     });
-  }, [review_id]); // hasCommented
+  }, [review_id]);
 
   const handleBack = () => {
     navigate(-1);
@@ -52,16 +51,15 @@ export const SingleReview = ({ author }) => {
       <NewComment
         author={author}
         review_id={review_id}
-        setReviewComments={setReviewComments} // <---
-        setCommentCount={setCommentCount} // <---
-        // setHasCommented={setHasCommented}
+        setReviewComments={setReviewComments}
+        setCommentCount={setCommentCount}
       />
       <Comments
         review={review}
         review_id={review_id}
-        commentCount={commentCount} // <---
-        reviewComments={reviewComments} // <---
-        setReviewComments={setReviewComments} // <---
+        commentCount={commentCount}
+        reviewComments={reviewComments}
+        setReviewComments={setReviewComments}
       />
       <button onClick={handleBack}>back</button>
     </div>
