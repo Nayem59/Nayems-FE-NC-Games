@@ -55,9 +55,11 @@ export const SingleReview = ({ author }) => {
         setCommentCount={setCommentCount}
       />
       <Comments
+        author={author}
         review={review}
         review_id={review_id}
         commentCount={commentCount}
+        setCommentCount={setCommentCount}
         reviewComments={reviewComments}
         setReviewComments={setReviewComments}
       />

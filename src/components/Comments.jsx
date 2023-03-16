@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { getComments } from "../api/api";
+import { getComments, deleteComment } from "../api/api";
 
 export const Comments = ({
-  review,
+  author,
   review_id,
-  commentCount, // <---
-  reviewComments, // <---
-  setReviewComments, // <---
+  commentCount,
+  setCommentCount,
+  reviewComments,
+  setReviewComments,
 }) => {
-  // const [reviewComments, setReviewComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,6 +23,24 @@ export const Comments = ({
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
+
+  const handleDelete = (id) => {
+    setIsPending(true);
+    deleteComment(id).then(() => {
+      setReviewComments((currReviewComments) => {
+        const index = currReviewComments.findIndex(
+          (comment) => comment.comment_id === id
+        );
+        const newComments = [...currReviewComments];
+        newComments.splice(index, 1);
+        return newComments;
+      });
+      setCommentCount((currCommentCount) => {
+        return currCommentCount - 1;
+      });
+      setIsPending(false);
+    });
+  };
 
   return (
     <div className="comments-container">
@@ -36,8 +55,21 @@ export const Comments = ({
                 Comment made on: {new Date(comment.created_at).toDateString()}
               </p>
               <div className="votes-container">
-                <h3>Votes: {comment.votes}</h3>
-                <button>Vote</button>
+                {author === comment.author && !isPending && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleDelete(comment.comment_id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
+                {isPending && (
+                  <button type="button" disabled>
+                    Deleting...
+                  </button>
+                )}
               </div>
             </li>
           );

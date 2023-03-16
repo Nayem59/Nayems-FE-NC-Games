@@ -43,3 +43,9 @@ export const getCategories = () => {
     return data.categories;
   });
 };
+
+export const deleteComment = (id) => {
+  return beNcGamesApi.delete(`/comments/${id}`).then(() => {
+    console.log("deleted");
+  });
+};
