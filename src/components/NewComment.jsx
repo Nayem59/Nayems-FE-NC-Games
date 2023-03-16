@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { postComments } from "../api/api";
 
-export const NewComment = ({ author, review_id, setHasCommented }) => {
+export const NewComment = ({
+  author,
+  review_id,
+  setReviewComments, // <---
+  setCommentCount, // <---
+}) => {
+  // ^ setHasCommented
   const [text, setText] = useState("");
   const [isPending, setIsPending] = useState(false);
 
@@ -13,19 +19,26 @@ export const NewComment = ({ author, review_id, setHasCommented }) => {
     const commentObj = { username: author, body: text };
     setIsPending(true);
     if (text) {
-      postComments(review_id, commentObj).then(() => {
+      postComments(review_id, commentObj).then((comment) => {
         console.log("posted comment");
         setText("");
-        setHasCommented((currHasCommented) => {
-          return currHasCommented ? false : true;
+        //
+        setReviewComments((currReviewComments) => {
+          return [comment, ...currReviewComments];
         });
+        //
+        setCommentCount((currCommentCount) => {
+          return currCommentCount + 1;
+        });
+        // setHasCommented((currHasCommented) => {
+        //   return currHasCommented ? false : true;
+        // });
         setIsPending(false);
       });
+    } else {
+      setIsPending(false);
     }
-    setIsPending(false);
   };
-
-  console.log("test");
 
   return (
     <div className="new-comment-container">
