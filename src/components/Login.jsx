@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export const Login = ({ author, setAuthor }) => {
-  console.log(author);
+  // console.log(author);
 
   return (
     <div id="login-container">

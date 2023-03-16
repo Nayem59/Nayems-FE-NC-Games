@@ -25,8 +25,6 @@ export const NewComment = ({ author, review_id, setHasCommented }) => {
     setIsPending(false);
   };
 
-  console.log("test");
-
   return (
     <div className="new-comment-container">
       <h3>Add a new Comment: </h3>

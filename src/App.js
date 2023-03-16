@@ -4,10 +4,12 @@ import { Header } from "./components/Header.jsx";
 import { Login } from "./components/Login.jsx";
 import { Reviews } from "./components/Reviews.jsx";
 import { SingleReview } from "./components/SingleReview.jsx";
+import { Categories } from "./components/Categories";
 import { useState } from "react";
 
 function App() {
   const [author, setAuthor] = useState("tickle122");
+  // const [category, setCategory] = useState("");
 
   return (
     <div className="App">
@@ -22,9 +24,8 @@ function App() {
           path="/reviews/:review_id"
           element={<SingleReview author={author} />}
         />
-        {/* prep for routes down the line */}
-        {/* <Route path="/categories" element={<Categories />} /> */}
-        {/* <Route path="/categories/:category" element={<SingleCategory />} /> */}
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/:category" element={<Reviews />} />
       </Routes>
     </div>
   );
