@@ -4,10 +4,9 @@ import { postComments } from "../api/api";
 export const NewComment = ({
   author,
   review_id,
-  setReviewComments, // <---
-  setCommentCount, // <---
+  setReviewComments,
+  setCommentCount,
 }) => {
-  // ^ setHasCommented
   const [text, setText] = useState("");
   const [isPending, setIsPending] = useState(false);
 
@@ -22,17 +21,12 @@ export const NewComment = ({
       postComments(review_id, commentObj).then((comment) => {
         console.log("posted comment");
         setText("");
-        //
         setReviewComments((currReviewComments) => {
           return [comment, ...currReviewComments];
         });
-        //
         setCommentCount((currCommentCount) => {
           return currCommentCount + 1;
         });
-        // setHasCommented((currHasCommented) => {
-        //   return currHasCommented ? false : true;
-        // });
         setIsPending(false);
       });
     } else {

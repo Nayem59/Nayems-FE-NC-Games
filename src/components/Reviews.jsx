@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getReviews } from "../api/api";
 
 export const Reviews = () => {
+  const { category } = useParams();
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,13 +12,13 @@ export const Reviews = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getReviews(page).then((data) => {
+    getReviews(page, category).then((data) => {
       setReviews(data.reviews);
       setTotalCount(data.total_count);
       setMaxPage(Math.ceil(data.total_count / 10));
       setIsLoading(false);
     });
-  }, [page]);
+  }, [page, category]);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -44,8 +45,12 @@ export const Reviews = () => {
         <button>Categories</button>
       </Link>
       <div id="all-reviews-container">
-        <h2>Here are all the {totalCount} Reviews:</h2>
+        <h2>
+          Here are all the {totalCount} Reviews
+          {category ? ` categorised by ${category}` : ""}:
+        </h2>
         <button>sort</button>
+        {category ? <Link to="/reviews">back to all Reviews</Link> : null}
         <div>
           {reviews.map((review) => {
             return (
