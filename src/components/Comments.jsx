@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getComments } from "../api/api";
 
-export const Comments = ({ review, review_id, hasCommented }) => {
+export const Comments = ({ review, review_id }) => {
   const [reviewComments, setReviewComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,7 +11,7 @@ export const Comments = ({ review, review_id, hasCommented }) => {
       setReviewComments(comments);
       setIsLoading(false);
     });
-  }, [review_id, hasCommented]);
+  }, [review_id]);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -26,7 +26,9 @@ export const Comments = ({ review, review_id, hasCommented }) => {
             <li key={comment.comment_id}>
               <p>Author: {comment.author}</p>
               <p>{comment.body}</p>
-              <p>Comment made on: {comment.created_at}</p>
+              <p>
+                Comment made on: {new Date(comment.created_at).toDateString()}
+              </p>
               <div className="votes-container">
                 <h3>Votes: {comment.votes}</h3>
                 <button>Vote</button>

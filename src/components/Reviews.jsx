@@ -37,6 +37,9 @@ export const Reviews = () => {
 
   return (
     <div>
+      <nav>
+        <Link to="/">back to login</Link>
+      </nav>
       <Link to="/categories">
         <button>Categories</button>
       </Link>

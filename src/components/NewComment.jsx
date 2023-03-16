@@ -12,14 +12,17 @@ export const NewComment = ({ author, review_id, setHasCommented }) => {
   const handlePostBtn = () => {
     const commentObj = { username: author, body: text };
     setIsPending(true);
-    postComments(review_id, commentObj).then(() => {
-      console.log("posted comment");
-      setText("");
-      setHasCommented((currHasCommented) => {
-        return currHasCommented ? false : true;
+    if (text) {
+      postComments(review_id, commentObj).then(() => {
+        console.log("posted comment");
+        setText("");
+        setHasCommented((currHasCommented) => {
+          return currHasCommented ? false : true;
+        });
+        setIsPending(false);
       });
-      setIsPending(false);
-    });
+    }
+    setIsPending(false);
   };
 
   console.log("test");

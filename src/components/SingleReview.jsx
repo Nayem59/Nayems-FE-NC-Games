@@ -21,7 +21,7 @@ export const SingleReview = ({ author }) => {
       setVotes(review.votes);
       setIsLoading(false);
     });
-  }, [review_id]);
+  }, [review_id, hasCommented]);
 
   const handleBack = () => {
     navigate(-1);
@@ -51,11 +51,7 @@ export const SingleReview = ({ author }) => {
         review_id={review_id}
         setHasCommented={setHasCommented}
       />
-      <Comments
-        review={review}
-        review_id={review_id}
-        hasCommented={hasCommented}
-      />
+      <Comments review={review} review_id={review_id} />
       <button onClick={handleBack}>back</button>
     </div>
   );
