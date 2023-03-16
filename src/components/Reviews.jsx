@@ -1,24 +1,29 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getReviews } from "../api/api";
 
 export const Reviews = () => {
   const { category } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
 
+  const sortByQuery = searchParams.get("sort_by") || undefined;
+  const orderByQuery = searchParams.get("order") || undefined;
+
   useEffect(() => {
     setIsLoading(true);
-    getReviews(page, category).then((data) => {
+    getReviews(page, category, sortByQuery, orderByQuery).then((data) => {
       setReviews(data.reviews);
       setTotalCount(data.total_count);
       setMaxPage(Math.ceil(data.total_count / 10));
       setIsLoading(false);
     });
-  }, [page, category]);
+  }, [page, category, sortByQuery, orderByQuery]);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -49,7 +54,47 @@ export const Reviews = () => {
           Here are all the {totalCount} Reviews
           {category ? ` categorised by ${category}` : ""}:
         </h2>
-        <button>sort</button>
+        <p>sort by:</p>
+        <select
+          value={sortByQuery}
+          onChange={(e) => {
+            const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.set("sort_by", e.target.value);
+            setSearchParams(newSearchParams);
+          }}
+        >
+          <option value="created_at">date</option>
+          <option value="comment_count">number of comments</option>
+          <option value="votes">votes</option>
+        </select>
+        <div>
+          <input
+            name="asc-desc"
+            type="radio"
+            id="asc"
+            value={orderByQuery}
+            onChange={(e) => {
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set("order", "asc");
+              setSearchParams(newSearchParams);
+            }}
+            checked={orderByQuery === "asc"}
+          />
+          <label htmlFor="asc">ascending</label>
+          <input
+            name="asc-desc"
+            type="radio"
+            id="desc"
+            value={orderByQuery}
+            onChange={(e) => {
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set("order", "desc");
+              setSearchParams(newSearchParams);
+            }}
+            checked={orderByQuery === "desc"}
+          />
+          <label htmlFor="desc">descending</label>
+        </div>
         {category ? <Link to="/reviews">back to all Reviews</Link> : null}
         <div>
           {reviews.map((review) => {
