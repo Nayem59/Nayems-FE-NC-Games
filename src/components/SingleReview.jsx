@@ -14,20 +14,30 @@ export const SingleReview = ({ author }) => {
   const [votes, setVotes] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
   const [reviewComments, setReviewComments] = useState([]);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
-    getReview(review_id).then((review) => {
-      setReview(review);
-      setVotes(review.votes);
-      setCommentCount(+review.comment_count);
-      setIsLoading(false);
-    });
+    getReview(review_id)
+      .then((review) => {
+        setReview(review);
+        setVotes(review.votes);
+        setCommentCount(+review.comment_count);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr(err.response.data.msg);
+        setIsLoading(false);
+      });
   }, [review_id]);
 
   const handleBack = () => {
     navigate(-1);
   };
+
+  if (err) {
+    return <h2>{err}</h2>;
+  }
 
   if (isLoading) {
     return <h2>Loading...</h2>;
