@@ -101,7 +101,7 @@ export const Reviews = () => {
               newSearchParams.set("order", "desc");
               setSearchParams(newSearchParams);
             }}
-            checked={orderByQuery === "desc"}
+            checked={orderByQuery === "desc" || !orderByQuery}
           />
           <label htmlFor="desc">descending</label>
         </div>
@@ -110,7 +110,7 @@ export const Reviews = () => {
           {reviews.map((review) => {
             return (
               <div className="review-card" key={review.review_id}>
-                <Link to={`/reviews/${review.review_id}`}>
+                <Link className="link" to={`/reviews/${review.review_id}`}>
                   <p>owner: {review.owner}</p>
                   <p>title: {review.title}</p>
                   <p>category: {review.category}</p>
