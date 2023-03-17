@@ -16,7 +16,6 @@ export const Categories = () => {
   }, []);
 
   const handleClick = (e) => {
-    // setCategory(e.target.textContent);
     navigate(`/categories/${e.target.textContent}`);
   };
 

@@ -11,19 +11,29 @@ export const Reviews = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
+  const [err, setErr] = useState("");
 
   const sortByQuery = searchParams.get("sort_by") || undefined;
   const orderByQuery = searchParams.get("order") || undefined;
 
   useEffect(() => {
     setIsLoading(true);
-    getReviews(page, category, sortByQuery, orderByQuery).then((data) => {
-      setReviews(data.reviews);
-      setTotalCount(data.total_count);
-      setMaxPage(Math.ceil(data.total_count / 10));
-      setIsLoading(false);
-    });
+    getReviews(page, category, sortByQuery, orderByQuery)
+      .then((data) => {
+        setReviews(data.reviews);
+        setTotalCount(data.total_count);
+        setMaxPage(Math.ceil(data.total_count / 10));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr(err.response.data.msg);
+        setIsLoading(false);
+      });
   }, [page, category, sortByQuery, orderByQuery]);
+
+  if (err) {
+    return <h2>{err}</h2>;
+  }
 
   if (isLoading) {
     return <h2>Loading...</h2>;

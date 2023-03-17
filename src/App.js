@@ -25,6 +25,7 @@ function App() {
         />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:category" element={<Reviews />} />
+        <Route path="/*" element={ <h1>404 page not found!</h1> } />
       </Routes>
     </div>
   );
