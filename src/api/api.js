@@ -4,10 +4,10 @@ const beNcGamesApi = axios.create({
   baseURL: "https://nayems-be-nc-games.onrender.com/api",
 });
 
-export const getReviews = (page, category) => {
+export const getReviews = (page, category, sort_by, order) => {
   return beNcGamesApi
     .get("/reviews", {
-      params: { p: page, category },
+      params: { p: page, category, sort_by, order },
     })
     .then(({ data }) => {
       return data;

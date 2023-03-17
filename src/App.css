@@ -82,3 +82,8 @@ textarea {
   border-radius: 30px;
   margin: 10px;
 }
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

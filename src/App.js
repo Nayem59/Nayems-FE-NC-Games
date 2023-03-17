@@ -9,7 +9,6 @@ import { useState } from "react";
 
 function App() {
   const [author, setAuthor] = useState("tickle122");
-  // const [category, setCategory] = useState("");
 
   return (
     <div className="App">
