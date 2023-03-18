@@ -1,13 +1,18 @@
 .App {
-  text-align: center;
-  background-color: grey;
+  background-color: #222733;
+  min-height: 97vh;
   margin: 10px;
   border: solid;
   border-radius: 30px;
-  box-shadow: 10px 10px 10px;
+  box-shadow: 10px 10px 10px black;
 }
 
-.img-reviews {
+/* .container {
+  background-color: white;
+  color: black;
+} */
+
+/* .img-reviews {
   width: 50vw;
   border-radius: 10px;
   margin: 10px;
@@ -86,4 +91,4 @@ textarea {
 .link {
   text-decoration: none;
   color: inherit;
-}
+} */
