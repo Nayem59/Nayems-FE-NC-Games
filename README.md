@@ -35,7 +35,7 @@ If you like to use Bootstrap styling you could install the following dependencie
 
 ## 🪁 Setup Redirects
 
-Add a file, ``_redirects`` (no file extension) to your public directory. This file should contain the redirect rule: ``\* /index.html 200``. This is telling Netlify "if a request comes in to any endpoint on our base url - serve our index.html page and give a 200 status". We put this in the public directory to ensure that Webpack includes this file in the production build of the app.
+Add a file, ``_redirects`` (no file extension) to your public directory. This file should contain the redirect rule: ``/*  /index.html 200``. This is telling Netlify "if a request comes in to any endpoint on our base url - serve our index.html page and give a 200 status". We put this in the public directory to ensure that Webpack includes this file in the production build of the app.
 
 ## 🏆 Hosting and deploying the website
 
