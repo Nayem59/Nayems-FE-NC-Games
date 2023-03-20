@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { postComments } from "../api/api";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export const NewComment = ({
   author,
@@ -19,7 +21,6 @@ export const NewComment = ({
     setIsPending(true);
     if (text) {
       postComments(review_id, commentObj).then((comment) => {
-        console.log("posted comment");
         setText("");
         setReviewComments((currReviewComments) => {
           return [comment, ...currReviewComments];
@@ -35,27 +36,27 @@ export const NewComment = ({
   };
 
   return (
-    <div className="new-comment-container">
-      <h3>Add a new Comment: </h3>
-      <textarea
+    <Form className="">
+      <Form.Control
+        className="m-1"
+        as="textarea"
+        rows={3}
         name="comment"
         id="comment"
-        cols="30"
-        rows="7"
-        placeholder="Add a comment..."
+        placeholder="Add a new comment..."
         value={text}
         onChange={handleText}
-      ></textarea>
+      />
       {!isPending && (
-        <button type="button" onClick={handlePostBtn}>
+        <Button className="m-1" type="button" onClick={handlePostBtn}>
           Post
-        </button>
+        </Button>
       )}
       {isPending && (
-        <button type="button" disabled>
+        <Button className="m-1" type="button" disabled>
           Posting...
-        </button>
+        </Button>
       )}
-    </div>
+    </Form>
   );
 };

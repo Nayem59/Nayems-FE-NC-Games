@@ -5,6 +5,11 @@ import { getReview } from "../api/api";
 import { Comments } from "./Comments.jsx";
 import { NewComment } from "./NewComment.jsx";
 import { Votes } from "./Votes.jsx";
+import Spinner from "react-bootstrap/Spinner";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
+
 
 export const SingleReview = ({ author }) => {
   const navigate = useNavigate();
@@ -40,17 +45,25 @@ export const SingleReview = ({ author }) => {
   }
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return (
+      <Container className="">
+        <Container className="mx-5 p-5">
+          <Spinner animation="border" variant="light" className="m-5 p-4" />;
+        </Container>
+      </Container>
+    );
   }
 
   return (
-    <div className="single-review-container">
+    <Container className="bg-light ct mx-auto">
       <div className="main-review">
         <h2 className="review-title">{review.title}</h2>
-        <p>owner: {review.owner}</p>
+        <h5 className="text-muted">by: {review.owner}</h5>
         <p>category: {review.category}</p>
         <p>designer: {review.designer}</p>
-        <img
+        <Image
+          rounded
+          fluid
           className="img-review"
           src={review.review_img_url}
           alt={review.title}
@@ -73,7 +86,7 @@ export const SingleReview = ({ author }) => {
         reviewComments={reviewComments}
         setReviewComments={setReviewComments}
       />
-      <button onClick={handleBack}>back</button>
-    </div>
+      <Button className="m-2" onClick={handleBack}>back</Button>
+    </Container>
   );
 };

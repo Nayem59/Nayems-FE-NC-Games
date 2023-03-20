@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { patchReview } from "../api/api";
+import Stack from 'react-bootstrap/Stack';
+import Button from "react-bootstrap/Button";
 
 export const Votes = ({ votes, setVotes, review_id }) => {
   const [err, setErr] = useState(null);
@@ -32,15 +34,15 @@ export const Votes = ({ votes, setVotes, review_id }) => {
   };
 
   return (
-    <div className="votes-container">
-      <h3>Votes: {votes}</h3>
+    <Stack className="col-md-2 mx-auto">
+      <h3 className="text-center">Votes: {votes}</h3>
       {err ? <p>{err}</p> : null}
-      <button onClick={handleUp} disabled={hasVoted}>
+      <Button className="my-1" onClick={handleUp} disabled={hasVoted}>
         +
-      </button>
-      <button onClick={handleDown} disabled={!hasVoted}>
+      </Button>
+      <Button className="my-1" onClick={handleDown} disabled={!hasVoted}>
         -
-      </button>
-    </div>
+      </Button>
+    </Stack>
   );
 };
