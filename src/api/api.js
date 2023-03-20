@@ -20,10 +20,14 @@ export const getReview = (id) => {
   });
 };
 
-export const getComments = (id) => {
-  return beNcGamesApi.get(`/reviews/${id}/comments`).then(({ data }) => {
-    return data.comments;
-  });
+export const getComments = (id, page) => {
+  return beNcGamesApi
+    .get(`/reviews/${id}/comments`, {
+      params: { p: page },
+    })
+    .then(({ data }) => {
+      return data.comments;
+    });
 };
 
 export const patchReview = (id, obj) => {
